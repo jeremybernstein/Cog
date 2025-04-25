@@ -74,7 +74,15 @@
 	}
 	if(error) {
 		error = nil;
-		contents = [NSString stringWithContentsOfFile:filename encoding:CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000) error:&error];
+		contents = [NSString stringWithContentsOfFile:filename encoding:NSISOLatin1StringEncoding error:&error];
+	}
+	if(error) {
+		error = nil;
+		contents = [NSString stringWithContentsOfFile:filename encoding:NSMacOSRomanStringEncoding error:&error];
+	}
+	if(error) {
+		error = nil;
+		contents = [NSString stringWithContentsOfFile:filename encoding:NSWindowsCP1252StringEncoding error:&error];
 	}
 	if(error) {
 		error = nil;
@@ -82,7 +90,7 @@
 	}
 	if(error) {
 		error = nil;
-		contents = [NSString stringWithContentsOfFile:filename encoding:NSISOLatin1StringEncoding error:&error];
+		contents = [NSString stringWithContentsOfFile:filename encoding:CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000) error:&error];
 	}
 	[[sandboxBrokerClass sharedSandboxBroker] endFolderAccess:sbHandle];
 	if(error || !contents) {
